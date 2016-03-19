@@ -1,21 +1,30 @@
 \documentclass[journal]{IEEEtran}
 
+
+
 \usepackage{lipsum}
 \usepackage{siunitx}
 \usepackage{tikz}
 \usepackage[american]{circuitikz}
 \usepackage{colortbl}
-\usepackage{amsmath}
-
 \graphicspath{{Figs/}}
 
+\usepackage{amsmath}
 
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
 \begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
 \title{Low Power Digital Beamforming\\ with Approximate Compute for Mobile Ultrasound Systems}
-
+%
+%
 % author names and IEEE memberships
 % note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
 % a structure at a ~ so this keeps an author's name from being broken across
@@ -76,12 +85,12 @@ When applied to beamforming in mobile ultrasonic applications, the inaccuracies 
 
 \section{Solution}
 
-In this work, a method for beamforming is proposed using approximate compute arithmetic blocks. Implementing beamforming with AC inherently reduces power and area at the expense of accuracy; however, the reduced resolution of a beamforming solution with AC may be suitable for mobile applications. Therefore, the goal of this work is to identify if AC beamforming integration presents an acceptable solution for ultrasonic mobile applications.
+In this project, a method for beamforming is proposed using approximate compute arithmetic blocks. Implementing beamforming with AC inherently reduces power and area at the expense of accuracy; however, the reduced resolution of a beamforming solution with AC may be suitable for mobile applications. Therefore, the goal of this work is to identify if AC beamforming integration presents an acceptable solution for ultrasonic mobile applications.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.4\textwidth]{beamform.jpg}
-    \caption{Block Diagram of typical Digital Beamformer}
+    \caption{Block Diagram of typical DAS Digital Beamformer}
     \label{fig:beamform}
 \end{figure}
 
@@ -93,11 +102,11 @@ We hope that the use of approximate computing will result in the power savings n
 
 \section{Experiment}
 
-The purpose of this project is to determine if adaptive minimum variance beamforming implemented with approximate compute is a viable option for mobile ultrasound applications. To determine this, two MV beamformer will be designed in the 28nm/32nm technology: one design implemented with AC arithmetic blocks and one design implemented with conventional arithmetic blocks. The following approximate compute arithmetic blocks will be implemented: the 8T XOR adder, the 6T XNOR adder, and the 8T XNOR adder. The MV beamformer will be designed in a modular fashion such that arithmetic blocks can be interchanged for easy comparison. The power, area, and image resolution of each implementation will be anaylzed.
+The purpose of this project is to determine if adaptive minimum variance beamforming implemented with approximate compute is a viable option for mobile ultrasound applications. To determine this, two MV beamformer will be designed in the 28/32nm technology: one design implemented with AC arithmetic blocks and one design implemented with exact arithmetic blocks. The following approximate compute arithmetic blocks will be implemented: the 8T XOR adder, the 6T XNOR adder, and the 8T XNOR adder. The MV beamformer will be designed in a modular fashion such that arithmetic blocks can be interchanged for easy comparison. The power, area, and image resolution of each implementation will be anaylzed.
 
 \subsection{Adaptive Minimum Variance Beamforming}
 
-The method for adpative MV beamforming is described in \cite{synnevag2007adaptive}. An transducer is assumed to contain an array of M, where each element records a signal $x_m(t)$. $P+1$ scatterers will be considered with each scatterer with a reflected signal $s_p(t)$. $s_0(t)$ describes the signal that originated from the focal point of the receiver. Under these assumptions, equation \ref{eq:time_delay} describes the $m$th time-delayed channel.
+The method for adpative MV beamforming is described in \cite{synnevag2007adaptive}. A transducer is assumed to contain an array of M, where each element records a signal $x_m(t)$. $P+1$ scatterers will be considered with each scatterer with a reflected signal $s_p(t)$. $s_0(t)$ describes the signal that originated from the focal point of the receiver. Under these assumptions, equation \ref{eq:time_delay} describes the $m$th time-delayed channel.
 
     \begin{equation}\label{eq:time_delay}
     x_m(t) = \frac{1}{r_{m,0}} \, s_0(t) + \sum_{p=1}^{P} \, \frac{1}{r_{m,p}} \, s_p(t) * \delta(t - \tau_{m,p}) + n_m(t)
@@ -283,7 +292,7 @@ The carry output is regenerative while the Sum output will adopt the noise of th
 \label{fig:AXA2}
 \end{figure}
 
-The 6 transistor Approximate XNOR Adder is implemented with an XNOR gate to generate an approximate sum and a pass transistor style circuit to generate the carry. 
+The 6 transistor Approximate XNOR Adder is implemented with an XNOR gate to generate an approximate sum and a pass transistor style circuit to generate the carry. The circuit diagram for the 6T approximate XNOR adder is shown in figure \ref{fig:AXA2}.
 
 \begin{table}
     \centering
@@ -379,7 +388,7 @@ The truth table for this adder is shown in table \ref{tab:AXA3_Truth}. This adde
 In order to evaluate and compare MV beamformer implementations with conventional arithmetic blocks and AC arithmetic blocks, figures of merit must be established. 
 Comparing the value of an exact result to the value of an incorrect result that was computed faster or with less resources is not trivial because traditional verification methods are based on verifying exact implementation. To address this problem, Venkatesan et. al implemented MACACO, a tool used to find bugs in approximate circuits and compare the outputs to those of the exact circuit implementation \cite{venkatesan2011macaco}. 
 
-We plan to build a digital beamformer with approximate circuits in a 28/32 \si{\nano\meter} process and compare the power, area, and resolution using MACACO with those of a beamformer built with exact circuits. The resolution of the beamformer will be evaluated by comparing sidelobe power of each implementation. Additionally, the feasibility of MV beamforming implemented with AC will be evaluated for mobile ultrasound applications based improved image quality at minimal area and power cost. A review of the literature suggests a expected power savings of 30-45\% through AC implementation.
+We plan to build a digital beamformer with approximate circuits in a 28/32 \si{\nano\meter} process and compare the power, area, and resolution using MACACO with those of a beamformer built with exact circuits. The resolution of the beamformer will be evaluated by comparing sidelobe power of each implementation. Additionally, the feasibility of MV beamforming implemented with AC will be evaluated for mobile ultrasound applications based on if the method improves image quality at minimal area and power cost. A review of the literature suggests an expected power savings of 30-45\% through AC implementation.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -480,7 +489,7 @@ We plan to build a digital beamformer with approximate circuits in a 28/32 \si{\
 
 \section{Conclusion}
 
-Adaptive minimum variance beamforming implemented with approximate compute arithmetic blocks provides a promising beamforming technique for mobile ultrasound applications due to expected power and area savings; moreover, minimum variance beamforming intends to improve image resolution despite expected inaccuracies from approximate compute implementation. A MV beamformer will be designed with approximate computing circuits and exact computing blocks. Using MACACO, the accuracy of the AC beamformer and exact beamformer will be compared. Additionally, the power, area, and image resolution of each implementation will be compared. Finally, adaptive minimum variance beamforming implemented with approximate computing will be evaluated as a viable beamforming solution for mobile applications. By improving image quality at minimal area and power cost, adaptive minimum variance beamforming implemented with approximate compute can improve portability of medical ultrasonic imagers, as well as enable personal health diagnostics. 
+Adaptive minimum variance beamforming implemented with approximate compute arithmetic blocks provides a promising beamforming technique for mobile ultrasound applications due to expected power and area savings; moreover, minimum variance beamforming intends to improve image resolution despite expected inaccuracies from approximate compute implementation. A MV beamformer will be designed with approximate computing circuits and exact computing blocks. Using MACACO, the accuracy of the AC beamformer and exact beamformer will be compared. Additionally, the power, area, and image resolution of each implementation will be compared. Finally, adaptive minimum variance beamforming implemented with approximate computing will be evaluated as a beamforming solution for mobile applications. By improving image quality at minimal area and power cost, adaptive minimum variance beamforming implemented with approximate compute can improve portability of medical ultrasonic imagers, as well as enable personal health diagnostics. 
 
 
 
