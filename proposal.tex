@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\title{Digital Beamformer using Approximate Computing Techniques for Ultrasonic Imaging Devices }
+\author{Josh Kay, Karthik Gopalan}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Abstract}
+
+High frequency ultrasound imaging is an effective tool for medical diagnosis due to its non-invasive, real time body imaging capability. Evolution of ultrasonic imaging technology from single element transducers to 2D transducer arrays improved focusing techniques for both the transmitting and receiving operations of the ultrasonic imaging device \cite{2dCMUT}. Receive focusing is known as beamforming and may be implemented with a series of delays and adders. However, the growing number of elements in 2D ultrasonic imaging devices have greatly increased the rate at which data needs to be transmitted from the system front-end and processed by the beamformer. Additionally, the increase in transmission and processing rates have greatly increased circuit area and power consumption in traditional digital beamformers \cite{ultrasoundLinearArray}. These shortcomings become increasingly more prevalent as ultrasonic imaging devices transition to mobile platforms \cite{mobileUltrasound}. 
+
+Approximate computing has been shown to dramatically reduce power consumption and improve performance in digital signal processing circuits. Kim et al. implemented a digital stereo matching algorithm with approximate computing that achieved an energy savings of 44\% compared to a traditional implementation. Their approach utilized mirror adders, XOR adders, and approximate multipliers to realize the power and area reduction \cite{ShanApprox}. 
+
+We propose to implement a digital beamformer using approximate computing techniques to provide adequate speed and power consumption for modern ultrasonic imaging applications. Approximate computing techniques introduce a trade-off between correctness and power. By consciously optimizing this trade-off, adequate resolution, performance, and low power digital beamforming can be achieved. Finally, we will compare the performance and power consumption of the proposed digital beamformer using approximate computing techniques to traditional digital beamformers. 
+
+\nocite{*}
+
+\bibliographystyle{unsrt}
+{\small \bibliography{proposal.bib}}
+
+\end{document}
